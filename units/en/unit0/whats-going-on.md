@@ -1,0 +1,25 @@
+# What's going on?
+
+## Tipping point
+
+In recent years, there's been a tipping point in the domains of language and vision. New models are releasing constantly, such as the recent [Llama 3](https://huggingface.co/blog/llama3).
+
+These have become useful tools for a wide range of tasks.
+
+## What about 3D?
+
+When it comes to 3D, we haven't quite reached this tipping point.
+
+However, we seem to be very close, with new research coming out constantly. I aggregate this research in this [Space](https://huggingface.co/spaces/dylanebert/research-tracker).
+
+While this is good, it can be very overwhelming to keep up with, especially since there's very little consistency in what 3D even means.
+
+## What is 3D?
+
+New research usually presents 3D results as pre-rendered videos, even for high-quality models like [TripoSR](https://stability.ai/news/triposr-3d-generation).
+
+But how did they get this video?
+
+Is it a mesh? A splat? A NeRF? Multi-view diffusion? What do these things even mean?
+
+In this course, we'll be answering this question, painting a broader picture of the ecosystem as a whole.
