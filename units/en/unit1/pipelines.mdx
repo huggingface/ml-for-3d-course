@@ -1,0 +1,23 @@
+# Generative 3D pipelines
+
+Let's take a step back and look at the generative 3D pipelines as a whole.
+
+![3D Pipeline](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/ml-for-3d-course/3d-pipeline.png?download=true)
+
+In Step 2, there is some [non-mesh](non-meshes.mdx) representation, labeled "ML-friendly 3D", which is converted to a mesh (Step 3) with Marching Cubes.
+
+Before ML-friendly 3D, there is often a step called "multi-view diffusion". This is where a [diffusion](https://huggingface.co/docs/diffusers/en/index) model, like [Stable Diffusion](https://huggingface.co/spaces/stabilityai/stable-diffusion), is used to generate novel views of an object - either from source images, or from text.
+
+This part of the pipeline is very technical, and evolving rapidly, being more related to diffusion than 3D. Therefore, in this course, we'll be treating it as a building block, focusing on how you can harness this building block using the Hugging Face ecosystem.
+
+If you want to learn more about the specifics of diffusion models, check out the [Diffusion Course](https://huggingface.co/learn/diffusion-course/en/unit0/1).
+
+## In this course
+
+In this course, each core unit will go over these three building blocks:
+
+1. Multi-view diffusion, with a focus on tools and ecosystem
+2. ML-friendly 3D, with a deep dive on Gaussian Splatting
+3. Meshes, with a focus on practical applications
+
+Each of these units will also include a hands-on exercise, where you'll get to apply what you've learned in a real-world scenario.

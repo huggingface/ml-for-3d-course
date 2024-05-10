@@ -1,0 +1,26 @@
+# Meshes
+
+## What's a mesh?
+
+A [mesh](https://en.wikipedia.org/wiki/Polygon_mesh) is a collection of vertices, edges, and faces that define a 3D object.
+
+This is how nearly all 3D is represented in real-world applications today.
+
+## The problem
+
+Meshes are difficult for machine learning models.
+
+Most 3D research today looks something like this:
+
+1. A machine learning pipeline produces a non-mesh 3D representation
+2. This non-mesh representation is converted to a mesh using [Marching Cubes](https://en.wikipedia.org/wiki/Marching_cubes)
+
+While progress has been very rapid in Step 1, Step 2 is relatively unchanged since the 1980s. This creates a gap between 3D research, which produces advancements in Step 1, and 3D applications, which rely on the final output of Step 2.
+
+This is a simplification, but highlights the challenges in the 3D machine learning landscape broadly.
+
+## The solution
+
+It remains to be seen whether Step 2 will be improved, or if the 3D ecosystem will change entirely (or somewhere in between).
+
+In the meantime, it's useful to understand the all building blocks of current 3D machine learning research. Starting with, [non-meshes](non-meshes.mdx).

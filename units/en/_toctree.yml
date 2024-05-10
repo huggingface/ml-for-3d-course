@@ -8,3 +8,13 @@
     title: Why does it matter?
   - local: unit0/how-to-do-it-yourself
     title: How to do it yourself
+- title: Unit 1. What is 3D?
+  sections:
+  - local: unit1/introduction
+    title: Introduction
+  - local: unit1/meshes
+    title: Meshes
+  - local: unit1/non-meshes
+    title: Non-meshes
+  - local: unit1/pipelines
+    title: Generative 3D pipelines
