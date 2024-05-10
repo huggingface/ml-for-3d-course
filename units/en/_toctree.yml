@@ -2,3 +2,9 @@
   sections:
   - local: unit0/introduction
     title: Welcome 🤗
+  - local: unit0/whats-going-on
+    title: What's going on?
+  - local: unit0/why-does-it-matter
+    title: Why does it matter?
+  - local: unit0/how-to-do-it-yourself
+    title: How to do it yourself
