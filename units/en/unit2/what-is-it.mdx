@@ -1,0 +1,21 @@
+# What is it?
+
+Multi-view diffusion is a type of diffusion model (e.g. [Stable Diffusion](https://huggingface.co/blog/stable_diffusion)). However, instead of being trained on regular images, it's trained on multiple views of an object from different perspectives.
+
+![Multi-view diffusion](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/ml-for-3d-course/multiview.webp)
+
+## Problems
+
+Multi-view diffusion is useful for 3D.
+
+However, it doesn't work out-of-the-box. It tends to suffer from somethines called the Janus problem, where objects have multiple faces (or more generally, lack of consistency across views).
+
+![Janus problem](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/ml-for-3d-course/janus.png)
+
+## Solutions
+
+State-of-the-art multi-view-diffusion models like [MVDream](https://huggingface.co/MVDream/MVDream) address this problem using specialized techniques.
+
+I won't be going into technical detail on multi-view diffusion in this course, since it's more related to diffusion than to 3D, but if you'd like to learn more, check out the [Diffusion course](https://huggingface.co/learn/diffusion-course/unit0/1).
+
+In the next sections, we'll be using a pre-trained multi-view diffusion model to generate multi-view images.

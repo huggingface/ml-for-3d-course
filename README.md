@@ -4,7 +4,7 @@
 
 This repository contains the [ML for 3D Course](https://huggingface.co/learn/ml-for-3d-course/unit0/introduction) files.
 
-Sign up [here](https://mailchi.mp/911880bcff7d/ml-for-3d-course)
+Sign up [here](https://mailchi.mp/911880bcff7d/ml-for-3d-course).
 
 ## Citing
 

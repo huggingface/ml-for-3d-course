@@ -1,0 +1,138 @@
+# Hands-on (Part 2)
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1_dYbOeL9J7K7LbruNO-w2NYvloCzlBsp?usp=sharing)
+
+Time to host your own demo! In this portion, you will:
+
+1. Re-run the notebook with your own model.
+2. Create a demo using Gradio.
+3. (Optional) Deploy your demo.
+
+## Re-Run the Notebook
+
+In the notebook, replace the model name with your own model name:
+
+```python
+import torch
+from diffusers import DiffusionPipeline
+
+multi_view_diffusion_pipeline = DiffusionPipeline.from_pretrained(
+    "<your-user-name>/<your-model-name>",
+    custom_pipeline="dylanebert/multi-view-diffusion",
+    torch_dtype=torch.float16,
+    trust_remote_code=True,
+).to("cuda")
+```
+
+Then, re-run the notebook. You should see the same results as before.
+
+![Multi-view Cats](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/ml-for-3d-course/multi-view-cats.png)
+
+## Gradio Demo
+
+Now, let's create a Gradio demo:
+
+```python
+import gradio as gr
+
+def run(image):
+  image = np.array(image, dtype=np.float32) / 255.0
+  images = multi_view_diffusion_pipeline("", image, guidance_scale=5, num_inference_steps=30, elevation=0)
+
+  images = [Image.fromarray((img * 255).astype("uint8")) for img in images]
+
+  width, height = images[0].size
+  grid_img = Image.new("RGB", (2 * width, 2 * height))
+
+  grid_img.paste(images[0], (0, 0))
+  grid_img.paste(images[1], (width, 0))
+  grid_img.paste(images[2], (0, height))
+  grid_img.paste(images[3], (width, height))
+
+  return grid_img
+
+demo = gr.Interface(fn=run, inputs="image", outputs="image")
+demo.launch()
+```
+
+The `run` method combines all the code from earlier in a single function. The `gr.Interface` method then uses this function to create a demo with `image` inputs and `image` outputs.
+
+Congratulations! You've created a Gradio demo for your model.
+
+## (Optional) Deploy Your Demo
+
+You probably want to run your demo outside of Colab.
+
+There are many way to do this:
+
+### Option 1: Create a Space
+
+Go to [Hugging Face Spaces](https://huggingface.co/spaces) and create a new space. Choose the `Gradio Space SDK`. Create a new file in the space called `app.py` and paste the code from the Gradio demo. Copy the demo [requirements.txt](https://huggingface.co/spaces/dylanebert/multi-view-diffusion/raw/main/requirements.txt) into the space.
+
+For a complete example, check out this [Space](https://huggingface.co/spaces/dylanebert/multi-view-diffusion), then click `Files` in the top right to view the source code.
+
+> Note: This approach requires a GPU to host publicly, which costs money. However, you can run the demo locally for free, following the instructions in [Option 3](#option-3-run-locally).
+
+### Option 2: Gradio Deploy
+
+Gradio makes it easy to deploy your demo to a server using the `gradio deploy` command.
+
+For more details, check out the [Gradio documentation](https://www.gradio.app/guides/sharing-your-app).
+
+### Option 3: Run locally
+
+To run locally, simply copy the code into a Python file and run it on your machine.
+
+The full source file should look like this:
+
+```python
+import gradio as gr
+import numpy as np
+import torch
+from diffusers import DiffusionPipeline
+from PIL import Image
+
+multi_view_diffusion_pipeline = DiffusionPipeline.from_pretrained(
+    "dylanebert/multi-view-diffusion",
+    custom_pipeline="dylanebert/multi-view-diffusion",
+    torch_dtype=torch.float16,
+    trust_remote_code=True,
+).to("cuda")
+
+
+def run(image):
+    image = np.array(image, dtype=np.float32) / 255.0
+    images = multi_view_diffusion_pipeline(
+        "", image, guidance_scale=5, num_inference_steps=30, elevation=0
+    )
+
+    images = [Image.fromarray((img * 255).astype("uint8")) for img in images]
+
+    width, height = images[0].size
+    grid_img = Image.new("RGB", (2 * width, 2 * height))
+
+    grid_img.paste(images[0], (0, 0))
+    grid_img.paste(images[1], (width, 0))
+    grid_img.paste(images[2], (0, height))
+    grid_img.paste(images[3], (width, height))
+
+    return grid_img
+
+
+demo = gr.Interface(fn=run, inputs="image", outputs="image")
+demo.launch()
+```
+
+To set up and run this demo in a virtual Python environment, run the following:
+
+```bash
+# Setup
+python -m venv venv
+source venv/bin/activate
+pip install -r https://huggingface.co/spaces/dylanebert/multi-view-diffusion/raw/main/requirements.txt
+
+# Run
+python app.py
+```
+
+> Note: This was tested using Python 3.10.12 and CUDA 12.1 on an NVIDIA RTX 4090.

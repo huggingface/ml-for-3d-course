@@ -18,3 +18,19 @@
     title: Non-meshes
   - local: unit1/pipelines
     title: Generative 3D pipelines
+- title: Unit 2. Multi-view diffusion
+  sections:
+  - local: unit2/introduction
+    title: Introduction
+  - local: unit2/setup
+    title: Setup
+  - local: unit2/what-is-it
+    title: What is it?
+  - local: unit2/pipeline
+    title: Pipeline
+  - local: unit2/hands-on-1
+    title: Hands-on (Part 1)
+  - local: unit2/hands-on-2
+    title: Hands-on (Part 2)
+  - local: unit2/bonus
+    title: Bonus
