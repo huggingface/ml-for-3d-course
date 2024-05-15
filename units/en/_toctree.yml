@@ -34,3 +34,7 @@
     title: Hands-on (Part 2)
   - local: unit2/bonus
     title: Bonus
+- title: Conclusion
+  sections:
+  - local: conclusion/conclusion
+    title: Conclusion
