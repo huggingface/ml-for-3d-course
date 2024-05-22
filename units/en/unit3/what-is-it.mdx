@@ -39,7 +39,9 @@ for point in splat2d:
         pixel += compute_contribution(point, pixel)
 ```
 
-In theory, every point contribute to every pixel, which is very inefficient. However, that's okay, because it's *differentiable*.
+The contribution of a point diminishes the further it is from the pixel. The points also need to be sorted, since they are blended back-to-front.
+
+In theory, every point contributes to every pixel, which is very inefficient. However, that's okay, because it's *differentiable*.
 
 In practice, this is optimized with a tile-based rasterization method, as detailed in the [original paper](https://huggingface.co/papers/2308.04079).
 
