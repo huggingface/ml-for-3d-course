@@ -76,6 +76,11 @@ from google.colab import files
 
 input_image = np.array(image, dtype=np.float32) / 255.
 multi_view_images = image_pipeline("", input_image, guidance_scale=5, num_inference_steps=30, elevation=0)
+```
+
+![Multi-view Cats](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/ml-for-3d-course/multi-view-cats.png)
+
+```python
 splat = splat_pipeline(multi_view_images)
 
 output_path = "/tmp/output.ply"
