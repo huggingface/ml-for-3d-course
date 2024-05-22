@@ -1,0 +1,72 @@
+# What is it?
+
+Gaussian Splatting is a **differentiable rasterization technique**.
+
+## Differentiable Rasterization
+
+In simple terms:
+
+- Differentiable can be thought of as a fancy way to say "AI-compatible"
+- Rasterization means taking data and drawing it on the screen
+
+Rasterization is already really common. It usually takes the form of [triangle rasterization](https://en.wikipedia.org/wiki/Rasterisation), where 3D data is converted to 2D pixel data and drawn on the screen. That's how meshes are usually rendered.
+
+![Mesh](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/ml-for-3d-course/mesh.png)
+
+However, triangle rasterization isn't very AI-compatible. This is because it includes discrete decisions like:
+
+- Is this pixel inside the triangle?
+
+Neural networks don't like discrete decisions. They want everything to be fuzzy and continous - or in other words, *differentiable*.
+
+## Gaussian Splatting
+
+Gaussian Splatting is a differentiable rasterization technique. But how does it actually work?
+
+Splats are composed of millions of points, where each point is composed of four parameters:
+
+- **Position**: where it's located (XYZ)
+- **Covariance**: how it's stretched (3x3 matrix)
+- **Color**: what color it is (RGB)
+- **Alpha**: how transparent it is (α)
+
+Then, to rasterize a splat, these points are projected into 2D. Then, for every pixel, contribute the contribution of every point. Or, in pseudocode:
+
+```python
+splat2d = splat.project_and_sort()
+for point in splat2d:
+    for pixel in image:
+        pixel += compute_contribution(point, pixel)
+```
+
+The contribution of a point diminishes the further it is from the pixel. The points also need to be sorted, since they are blended back-to-front.
+
+In theory, every point contributes to every pixel, which is very inefficient. However, that's okay, because it's *differentiable*.
+
+In practice, this is optimized with a tile-based rasterization method, as detailed in the [original paper](https://huggingface.co/papers/2308.04079).
+
+## Inference
+
+If you're not training a model, then it doesn't matter if it's differentiable. You can just treat each point as an instanced quad, as in open-source web viewers like [gsplat.js](https://github.com/huggingface/gsplat.js).
+
+This can be seen in action [here](https://huggingface.co/spaces/dylanebert/igf).
+
+## Training
+
+The [original paper](https://huggingface.co/papers/2308.04079) intializes the points using [Structure-from-Motion](https://en.wikipedia.org/wiki/Structure_from_motion), a traditional algorithm for 3D reconstruction.
+
+![Structure from Motion](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/124_ml-for-games/gaussian/points.png)
+
+These points are then rasterized using the tile-based method, and the loss is computed by comparing the rasterized image to the ground truth. Gradient descent is applies to adjust the point parameters (position, covariance, color, alpha).
+
+![Trained](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/124_ml-for-games/gaussian/ellipsoids.png)
+
+The original paper also uses automated densification and pruning to automatically add and remove points as needed. More details can be found [here](https://huggingface.co/blog/gaussian-splatting).
+
+![Final](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/blog/124_ml-for-games/gaussian/bicycle.png)
+
+## Generative 3D
+
+The original approach is suitable for learning individual scenes from photos. However, the concept of differentiable rasterization generalizes to more complex models like neural networks.
+
+This is the case with generative 3D models like [LGM](https://huggingface.co/spaces/dylanebert/LGM-mini), which we'll be using in the next section to build our own generative 3D demo.
