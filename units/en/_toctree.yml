@@ -34,6 +34,16 @@
     title: Hands-on (Part 2)
   - local: unit2/bonus
     title: Bonus
+- title: Unit 3. Gaussian Splatting
+  sections:
+  - local: unit3/introduction
+    title: Introduction
+  - local: unit3/what-is-it
+    title: What is it?
+  - local: unit3/hands-on
+    title: Hands-on
+  - local: unit3/bonus
+    title: Bonus
 - title: Conclusion
   sections:
   - local: conclusion/conclusion

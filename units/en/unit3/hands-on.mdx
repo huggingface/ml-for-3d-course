@@ -1,0 +1,109 @@
+# Hands-on
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1QNfJNqJ6_D9nnf7QeGEW9R3YvWQRxIKY?usp=sharing)
+
+The goal of this hands-on is to build a text-to-splat pipeline, using [LGM](https://huggingface.co/spaces/dylanebert/LGM-mini) (Large Gaussian Model) as an example.
+
+This consists of two parts of the generative 3D pipeline:
+
+1. Multi-view Diffusion
+2. ML-friendly 3D (Gaussian Splatting)
+
+## Setup
+
+Open the Colab notebook linked above. Click `Runtime` -> `Change runtime type` and select `GPU` as the hardware accelerator.
+
+Then, start by installing the necessary dependencies:
+
+```python
+!pip install -r https://huggingface.co/spaces/dylanebert/LGM-mini/raw/main/requirements.txt
+!pip install https://huggingface.co/spaces/dylanebert/LGM-mini/resolve/main/wheel/diff_gaussian_rasterization-0.0.0-cp310-cp310-linux_x86_64.whl
+```
+
+As before, if the notebook asks you to restart the session, do so, then rerun the code block.
+
+## Load the Models
+
+Just like in the multi-view diffusion notebook, load the pretrained multi-view diffusion model:
+
+```python
+import torch
+from diffusers import DiffusionPipeline
+
+image_pipeline = DiffusionPipeline.from_pretrained(
+    "dylanebert/multi-view-diffusion",
+    custom_pipeline="dylanebert/multi-view-diffusion",
+    torch_dtype=torch.float16,
+    trust_remote_code=True,
+).to("cuda")
+```
+
+This is because multi-view diffusion is the first step in the LGM pipeline.
+
+Then, load the generative Gaussian Splatting model, the main contribution of LGM:
+
+```python
+splat_pipeline = DiffusionPipeline.from_pretrained(
+    "dylanebert/LGM",
+    custom_pipeline="dylanebert/LGM",
+    torch_dtype=torch.float16,
+    trust_remote_code=True,
+).to("cuda")
+```
+
+## Load an Image
+
+As before, load the famous Cat Statue image:
+
+```python
+import requests
+from PIL import Image
+from io import BytesIO
+
+image_url = "https://huggingface.co/datasets/dylanebert/3d-arena/resolve/main/inputs/images/cat_statue.jpg"
+response = requests.get(image_url)
+image = Image.open(BytesIO(response.content))
+image
+```
+
+## Run the Pipeline
+
+Finally, pass the image through both pipelines. The output will be a matrix of splat data, which can be saved with `splat_pipeline.save_ply()`.
+
+```python
+import numpy as np
+from google.colab import files
+
+input_image = np.array(image, dtype=np.float32) / 255.
+multi_view_images = image_pipeline("", input_image, guidance_scale=5, num_inference_steps=30, elevation=0)
+splat = splat_pipeline(multi_view_images)
+
+output_path = "/tmp/output.ply"
+splat_pipeline.save_ply(splat, output_path)
+files.download(output_path)
+```
+
+This includes `files.download()` to download the file to your local machine when running the notebook in Colab. If you're running the notebook locally, you can remove this line.
+
+Congratulations! You've run the LGM pipeline.
+
+## Gradio Demo
+
+Now, let's create a Gradio demo to run the model end-to-end with an easy-to-use interface:
+
+```python
+import gradio as gr
+
+def run(image):
+    input_image = image.astype("float32") / 255.0
+    images = image_pipeline("", input_image, guidance_scale=5, num_inference_steps=30, elevation=0)
+    splat = splat_pipeline(images)
+    output_path = "/tmp/output.ply"
+    splat_pipeline.save_ply(splat, output_path)
+    return output_path
+
+demo = gr.Interface(fn=run, inputs="image", outputs=gr.Model3D())
+demo.launch()
+```
+
+This will create a Gradio demo that takes an image as input and outputs a 3D splat.
