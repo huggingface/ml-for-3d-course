@@ -60,7 +60,7 @@ import requests
 from PIL import Image
 from io import BytesIO
 
-image_url = "https://huggingface.co/datasets/dylanebert/3d-arena/resolve/main/inputs/images/cat_statue.jpg"
+image_url = "https://huggingface.co/datasets/dylanebert/3d-arena/resolve/main/inputs/images/a_cat_statue.jpg"
 response = requests.get(image_url)
 image = Image.open(BytesIO(response.content))
 image
