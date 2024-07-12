@@ -54,6 +54,18 @@
         title: Mesh generation
       - local: unit4/hands-on
         title: Hands-on
+- title: Unit 5. Capstone
+  sections:
+      - local: unit5/introduction
+        title: Introduction
+      - local: unit5/walkthrough
+        title: Walkthrough
+      - local: unit5/run-in-notebook
+        title: Run in notebook
+      - local: unit5/run-locally
+        title: Run locally
+      - local: unit5/run-via-api
+        title: Run via API
 - title: Conclusion
   sections:
       - local: conclusion/conclusion
