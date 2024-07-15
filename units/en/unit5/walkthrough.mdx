@@ -1,0 +1,49 @@
+# Walkthrough
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://githubtocolab.com/dylanebert/ml-for-3d-course-notebooks/blob/main/capstone.ipynb)
+
+This section will walk you step-by-step through the easiest way to set up a demo based on [LGM](https://huggingface.co/spaces/ashawkey/LGM), as covered in previous units.
+
+## 1. Duplicate the model
+
+Start by duplicating the [LGM-full](https://huggingface.co/dylanebert/LGM-full) model.
+
+1. Go to the [Repo duplicator](https://huggingface.co/spaces/huggingface-projects/repo_duplicator).
+2. Generate a `write token` in your [account settings](https://hf.co/settings/tokens). Copy it into the `token` field.
+3. Enter `dylanebert/LGM-full` in the `source_repo` field.
+4. Enter `{username}/{model_name}` in the `dst_repo` field, replacing `{username}` with your Hugging Face account username, and `{model_name}` with any name you like, such as `LGM`.
+5. Click Submit.
+
+You will see a link labeled "find your repo **here**", which leads to `http://huggingface.co/{username}/{model_name}`.
+
+![Repo duplicator](https://huggingface.co/datasets/dylanebert/ml-for-3d-course/resolve/main/duplicate.png)
+
+Congratulations! You can now use this model with Diffusers, and it will appear in [hf.co/models](https://huggingface.co/models?pipeline_tag=image-to-3d&sort=trending).
+
+## 2. Duplicate the space
+
+Go to the [LGM Tiny](https://huggingface.co/spaces/dylanebert/LGM-tiny) space, which provides a simplified image-to-3D demo.
+
+1. Click the `Duplicate Space` button.
+2. Choose free hardware, or ZeroGPU Nvidia A100 if available.
+3. Click `Files` in the top right.
+4. Click `app.py` to view the demo source code.
+5. Click `edit` to change the code.
+6. Replace the two instances of `dylanebert/LGM-full` with your model path, e.g. `{username}/{model_name}`.
+7. Click `Commit changes`.
+
+<iframe src="https://dylanebert-LGM-tiny.hf.space" frameborder="0" width="850" height="450"></iframe>
+
+Congratulations! You've created a demo and met the minimum requirements for this capstone project.
+
+## So how do I run it?
+
+The demo requires a GPU, so it won't work on free hardware. However, there are many free options:
+
+1. **Run in this notebook**: Validate the code quickly.
+2. **Run locally**: Clone your space and run it locally.
+3. **Community grant**: Building something cool? Apply for a community GPU grant in your space settings.
+4. **Run via API**: Less flexible, but runs on free hardware.
+5. **Just don't**: Alternatively, skip all this and go straight to the [form](https://forms.gle/rQedXFktHPYeikrt6).
+
+The following sections will walk you through each of these options.
