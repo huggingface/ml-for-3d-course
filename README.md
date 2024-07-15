@@ -20,3 +20,4 @@ To cite this repository in publications:
   howpublished = {\url{https://github.com/huggingface/ml-for-3d-course}},
 }
 ```
+
