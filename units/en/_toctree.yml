@@ -1,50 +1,72 @@
 - title: Unit 0. Introduction
   sections:
-  - local: unit0/introduction
-    title: Welcome 🤗
-  - local: unit0/whats-going-on
-    title: What's going on?
-  - local: unit0/why-does-it-matter
-    title: Why does it matter?
-  - local: unit0/how-to-do-it-yourself
-    title: How to do it yourself
+      - local: unit0/introduction
+        title: Welcome 🤗
+      - local: unit0/whats-going-on
+        title: What's going on?
+      - local: unit0/why-does-it-matter
+        title: Why does it matter?
+      - local: unit0/how-to-do-it-yourself
+        title: How to do it yourself
 - title: Unit 1. What is 3D?
   sections:
-  - local: unit1/introduction
-    title: Introduction
-  - local: unit1/meshes
-    title: Meshes
-  - local: unit1/non-meshes
-    title: Non-meshes
-  - local: unit1/pipelines
-    title: Generative 3D pipelines
+      - local: unit1/introduction
+        title: Introduction
+      - local: unit1/meshes
+        title: Meshes
+      - local: unit1/non-meshes
+        title: Non-meshes
+      - local: unit1/pipelines
+        title: Generative 3D pipelines
 - title: Unit 2. Multi-view diffusion
   sections:
-  - local: unit2/introduction
-    title: Introduction
-  - local: unit2/setup
-    title: Setup
-  - local: unit2/what-is-it
-    title: What is it?
-  - local: unit2/pipeline
-    title: Pipeline
-  - local: unit2/hands-on-1
-    title: Hands-on (Part 1)
-  - local: unit2/hands-on-2
-    title: Hands-on (Part 2)
-  - local: unit2/bonus
-    title: Bonus
+      - local: unit2/introduction
+        title: Introduction
+      - local: unit2/setup
+        title: Setup
+      - local: unit2/what-is-it
+        title: What is it?
+      - local: unit2/pipeline
+        title: Pipeline
+      - local: unit2/hands-on-1
+        title: Hands-on (Part 1)
+      - local: unit2/hands-on-2
+        title: Hands-on (Part 2)
+      - local: unit2/bonus
+        title: Bonus
 - title: Unit 3. Gaussian Splatting
   sections:
-  - local: unit3/introduction
-    title: Introduction
-  - local: unit3/what-is-it
-    title: What is it?
-  - local: unit3/hands-on
-    title: Hands-on
-  - local: unit3/bonus
-    title: Bonus
+      - local: unit3/introduction
+        title: Introduction
+      - local: unit3/what-is-it
+        title: What is it?
+      - local: unit3/hands-on
+        title: Hands-on
+      - local: unit3/bonus
+        title: Bonus
+- title: Unit 4. Meshes
+  sections:
+      - local: unit4/introduction
+        title: Introduction
+      - local: unit4/marching-cubes
+        title: Marching Cubes
+      - local: unit4/mesh-generation
+        title: Mesh generation
+      - local: unit4/hands-on
+        title: Hands-on
+- title: Unit 5. Capstone
+  sections:
+      - local: unit5/introduction
+        title: Introduction
+      - local: unit5/walkthrough
+        title: Walkthrough
+      - local: unit5/run-in-notebook
+        title: Run in notebook
+      - local: unit5/run-locally
+        title: Run locally
+      - local: unit5/run-via-api
+        title: Run via API
 - title: Conclusion
   sections:
-  - local: conclusion/conclusion
-    title: Conclusion
+      - local: conclusion/conclusion
+        title: Conclusion
