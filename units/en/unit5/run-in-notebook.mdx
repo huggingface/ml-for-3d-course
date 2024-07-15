@@ -26,7 +26,6 @@ import subprocess
 
 import gradio as gr
 import numpy as np
-import spaces
 import torch
 from diffusers import DiffusionPipeline
 
@@ -44,7 +43,6 @@ pipeline = DiffusionPipeline.from_pretrained(
 ).to("cuda")
 
 
-@spaces.GPU
 def run(image):
     input_image = np.array(image, dtype=np.float32) / 255.0
     splat = pipeline(
@@ -154,3 +152,5 @@ demo = gr.Interface(
 )
 demo.queue().launch()
 ```
+
+![LGM Tiny Demo](https://huggingface.co/datasets/dylanebert/ml-for-3d-course/resolve/main/lgm-tiny.png)
