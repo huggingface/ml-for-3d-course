@@ -14,7 +14,7 @@ jobs:
       package: ml-for-3d-course
       package_name: ml-for-3d-course
       path_to_docs: ml-for-3d-course/units/
-      additional_args: --not_python_module
+      additional_args: --not_python_module --latex
       languages: en
     secrets:
       token: ${{ secrets.HUGGINGFACE_PUSH }}
